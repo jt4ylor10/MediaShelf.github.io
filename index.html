@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="The Media Shelf Team">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bungee&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Protest+Guerrilla&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="frontend/css/styles.css">
+
+    <link rel="stylesheet" href="frontend/css/base.css">
+    <link rel="stylesheet" href="frontend/css/nav.css">
+    <link rel="stylesheet" href="frontend/css/landing.css">
+    <link rel="stylesheet" href="frontend/css/hero.css">
+    <link rel="stylesheet" href="frontend/css/intro.css">
+    <link rel="stylesheet" href="frontend/css/footer.css">
     <title>MediaShelf</title>
 </head>
 <body>
@@ -14,9 +23,7 @@
         <nav class="nav">
             <a class="nav__logo" href="#">MEDIA SHELF</a>
 
-            <button class="nav__menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
-                MENU
-            </button>
+            <button class="nav__menu-btn" type="button" id="menuBtn" aria-label="Toggle menu">MENU</button>
         </nav>
 
         <div class="hero">
@@ -61,15 +68,18 @@
         <p class="footer__copy">&copy; 2026 The Media Shelf Team - All rights reserved.</p>
     </footer>
 
-    <!-- adding script here for now -->
-    <!-- script to enable horizontal scrolling for the intro carousel -->
-    <script> const carousel = document.querySelector('.intro__carousel');
-        carousel.addEventListener('wheel', (evt) => {
-            if (evt.deltaY !== 0) {
+    <script>
+        // Turn vertical wheel movement into horizontal scrolling for the carousel.
+        (() => {
+            const carousel = document.querySelector('.intro__carousel');
+            if (!carousel) return;
+
+            carousel.addEventListener('wheel', (evt) => {
+                if (evt.deltaY === 0) return;
                 evt.preventDefault();
                 carousel.scrollLeft += evt.deltaY;
-            }
-        });
+            }, { passive: false });
+        })();
     </script>
 </body>
 </html>
